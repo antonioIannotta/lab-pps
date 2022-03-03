@@ -4,7 +4,7 @@ public class BankAccountWithAtm implements BankAccount{
 
     private final AccountHolder holder;
     private double balance;
-    private final int FEE = 1;
+    private static final int FEE = 1;
 
 
     public BankAccountWithAtm(AccountHolder holder, double balance) {
