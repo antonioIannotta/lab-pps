@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public class CircularIntegerList implements CircularList{
 
-    private ArrayList<Integer> circularIntegerList;
+    private List<Integer> circularIntegerList;
     private int next = 0;
 
     public CircularIntegerList(){
@@ -30,10 +30,7 @@ public class CircularIntegerList implements CircularList{
     @Override
     public Optional<Integer> next() {
         Optional<Integer> result = Optional.ofNullable(circularIntegerList.get(next));
-        next += 1;
-        if (next == this.size()){
-            next = 0;
-        }
+        (next == this.size() - 1) ? next = 0 : next += 1;
         return result;
     }
 
@@ -41,9 +38,9 @@ public class CircularIntegerList implements CircularList{
     public Optional<Integer> previous() {
         Optional<Integer> result;
         if (next == 0){
-            result = Optional.ofNullable(circularIntegerList.get(this.size() - 1));
+            result = resultForPrevious(this.size);
         }else{
-            result = Optional.ofNullable(circularIntegerList.get(next - 1));
+            result = resultForPrevious(next);
         }
         return result;
     }
@@ -67,5 +64,9 @@ public class CircularIntegerList implements CircularList{
         }
 
         return result;
+    }
+    
+    private Optional<Integer> startingPointForPrevious(int startingPoint){
+        return Optional.ofNullable(circularIntegerList.get(startingPoint - 1));
     }
 }
